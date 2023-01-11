@@ -1,0 +1,131 @@
+------------------------------------SET MATRIX ZEROS-----------------------------------------
+class Solution {
+    public void setZeroes(int[][] matrix) {
+
+        //Taking fr and fc default as false
+        boolean fr=false,fc=false;
+
+//making the first row(fr) and first column(fc) true when the fr or fc have default 0
+        for (int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[0][j]==0) fr=true;
+                if(matrix[i][0]==0) fc=true;
+            }
+        }
+
+// now changing the values in fr and fc to zero if the intersection point is zero like if (1,1)=0 then setting (0,1)&(1,0)=0
+        for(int i=1;i<matrix.length;i++){
+            for( int j=1;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    matrix[0][j]=0;
+                    matrix[i][0]=0;
+                }
+            }
+        }
+
+//now checking if the row have any zero and making entire column zero wrt to the zero in the row
+        for(int j=1;j<matrix[0].length;j++){
+            if(matrix[0][j]==0){
+                for(int i=1;i<matrix.length;i++){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+
+//now checking if the column have any zero and making entire row zero wrt to the zero in the column
+        for(int i=1;i<matrix.length;i++){
+            if(matrix[i][0]==0){
+                for(int j=1;j<matrix[0].length;j++){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+
+//now we check for the fr is true i.e fr is having default zero or not if fr is zero setting entire first row to zero
+        if(fr){
+            for(int j=0;j<matrix[0].length;j++){
+                matrix[0][j]=0;
+            }
+        }
+
+//now we check for the fc is true i.e fc is having default zero or not if fc is zero setting entire first column to zero
+        if(fc){
+            for(int i=0;i<matrix.length;i++){
+                matrix[i][0]=0;
+            }
+            
+        }
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PASCALS TRIANGLE----------------------------------------------------------------------
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result= new ArrayList<List<Integer>>();
+        List<Integer> prev_row=new ArrayList<Integer>();
+        
+        for (int i=0;i<numRows;i++){
+            List<Integer> curr_row=new ArrayList<Integer>();
+            for(int j=0;j<=i;j++){
+                if(j==0 || j==i) {
+                    curr_row.add(1);
+                }
+                else{
+                    curr_row.add(prev_row.get(j-1)+prev_row.get(j));
+                }
+            }
+            result.add(curr_row);
+            prev_row.removeAll(prev_row);
+            prev_row.addAll(curr_row);
+            
+        }
+        return result;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------sort 0's 1's and 2's------------------------------------------------------------
+	public int[] Solution(int[] input){
+	    int a=0,b=0,c=0;
+	    for ( int i=0; i<input.length;i++){
+	        if(input[i]==0){
+	            a++;
+	        }
+	        else if(input[i]==1){
+	            b++;
+	        }
+	        else{
+	            c++;
+	        }
+	    }
+	    
+	        for(int x=0;x<a;x++){
+	            input[x]=0;
+	        }
+	        for(int y=a;y<a+b;y++){
+	            input[y]=1;
+	        }
+	        for(int z=a+b;z<a+b+c;z++){
+	            input[z]=2;
+	        }
+	    return input;
+	}
+--------------------------------------------------------------------------------------------------------------------------
+---------------------stock buy and sell---------------------------------------------------------------------------
+public int Solution(int[] input){
+	    int min=Integer.MAX_VALUE;
+	    int max=Integer.MIN_VALUE;
+	    int index=0;
+	  for(int i=0;i<input.length;i++){
+	      if(input[i]<min){
+	          min=input[i];
+	          index=i;
+	      }
+	  }
+	  for(int i=index;i<input.length;i++){
+	      if(input[i]>max){
+	          max=input[i];
+	      }
+	  }
+	  return max-min;
+	}
+---------------------------------------------------------------------------------------------
