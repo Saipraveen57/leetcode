@@ -1,0 +1,56 @@
+Find the repeating and missing numbers
+Problem Statement: You are given a read-only array of N integers with values 
+also in the range [1, N] both inclusive. Each integer appears exactly once except 
+A which appears twice and B which is missing. The task is to find the repeating and 
+missing numbers A and B where A repeats twice and B is missing.
+
+Input Format:  array[] = {3,1,2,5,3}
+
+Result: {3,4)
+
+Explanation: A = 3 , B = 4 
+Since 3 is appearing twice and 4 is missing
+
+//Below is the code for the above problem
+public class Main
+{
+	public static void main(String[] args) {
+		int[] input = new int[]{3,1,2,5,4,6,7,5};
+		int[] dummy_array=new int[input.length];
+		int missing_number=0;
+		int repeating_number=0;
+		int count=0;
+		int count_for_repeating_number=0;
+		int count_for_missing_number=0;
+		
+		//the below code is to find the repeating number in the array
+		for(int i=1; i<=input.length;i++){
+		    count_for_repeating_number=0;
+		    for(int j=0;j<input.length;j++){
+    		    if(input[j]==i){
+    		        dummy_array[count]=i;
+    		        count++;
+    		        count_for_repeating_number++;
+    		    }
+		    }
+		    if(count_for_repeating_number==2){
+		        repeating_number=i;
+		    }
+		}
+		
+		//this below code is for finding the missing number in the array
+		for(int i=1;i<=input.length;i++){
+		    count_for_missing_number=0;
+		    for(int j=0;j<input.length;j++){
+		        if(dummy_array[j]==i)
+		            count_for_missing_number++;
+		    }
+		    if(count_for_missing_number==0){
+		        missing_number=i;
+		    }
+		}
+		
+		//output of repeating and missing numbers with space separated
+		System.out.println(repeating_number+" "+missing_number);
+	}
+}
